@@ -57,13 +57,13 @@ QuidClaw is an MCP server — you don't run it directly. Instead, you configure 
 One command installs QuidClaw and configures your MCP clients automatically:
 
 ```bash
-npx add-mcp --uvx quidclaw -a claude-desktop
+npx add-mcp "uvx quidclaw" -a claude-desktop
 ```
 
 Use multiple `-a` flags to configure several clients at once:
 
 ```bash
-npx add-mcp --uvx quidclaw -a claude-desktop -a claude-code -a cursor -a codex
+npx add-mcp "uvx quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
 ```
 
 > Supported clients: `claude-desktop`, `claude-code`, `cursor`, `codex`, `windsurf`, `zed`, `vscode`. See [add-mcp](https://github.com/nicepkg/add-mcp) for the full list.
