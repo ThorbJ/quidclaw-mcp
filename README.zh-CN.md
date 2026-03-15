@@ -1,14 +1,20 @@
 # QuidClaw
 
-你的私人 CFO，由 AI 驱动。
+AI 驱动的私人 CFO。
 
-QuidClaw 是一个 [MCP](https://modelcontextprotocol.io/) 服务器，让 AI 助手能够使用 [Beancount](https://beancount.github.io/) 复式记账来管理你的个人财务。把它连接到 Claude、ChatGPT 或任何支持 MCP 的客户端——你就有了一个私人 CFO，帮你追踪每一笔钱、生成报表、把账目打理得井井有条。
+*本地优先。隐私至上。你的数据永远不会离开你的电脑。*
+
+QuidClaw 是一个开源的 [MCP](https://modelcontextprotocol.io/) 服务器，让 AI 助手能够使用 [Beancount](https://beancount.github.io/) 复式记账来管理你的个人财务。把它连接到 Claude、ChatGPT 或任何支持 MCP 的客户端——你就有了一个私人 CFO，帮你追踪每一笔钱、生成报表、把账目打理得井井有条。
 
 > **"午饭花了45，微信付的"** → AI 调用 QuidClaw → 正确的复式记账分录写入你的本地账本。
 
-所有数据都在你的电脑上。没有服务器，没有云端，没有账户。只有纯文本 `.bean` 文件。
-
 [English / 英文文档](README.md)
+
+## 为什么选择 QuidClaw
+
+- **隐私优先** — 所有数据以纯文本形式存储在本地。没有服务器，没有云端，没有遥测。一切都不会离开你的电脑。
+- **数据由你掌控** — 标准的 Beancount `.bean` 文件，你可以直接阅读、编辑、用 Git 管理。没有厂商锁定，没有私有格式。
+- **AI 驱动，而非 AI 依赖** — QuidClaw 只是工具。智能来自你的 AI 客户端。随时可以更换 AI 服务商。
 
 ## 工作原理
 

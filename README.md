@@ -1,14 +1,20 @@
 # QuidClaw
 
-Your Personal CFO, powered by AI.
+Your AI-powered Personal CFO.
 
-QuidClaw is an [MCP](https://modelcontextprotocol.io/) server that gives AI assistants the ability to manage your personal finances using [Beancount](https://beancount.github.io/) double-entry accounting. Connect it to Claude, ChatGPT, or any MCP-compatible client — and you have a Personal CFO that tracks every dollar, generates reports, and keeps your books clean.
+*Local-first. Privacy by design. Your data never leaves your machine.*
+
+QuidClaw is an open-source [MCP](https://modelcontextprotocol.io/) server that gives AI assistants the ability to manage your personal finances using [Beancount](https://beancount.github.io/) double-entry accounting. Connect it to Claude, ChatGPT, or any MCP-compatible client — and you have a Personal CFO that tracks every dollar, generates reports, and keeps your books clean.
 
 > **"Lunch was $12, paid with Apple Pay"** → AI calls QuidClaw → proper double-entry transaction recorded in your local ledger.
 
-All data stays on your machine. No servers, no cloud, no accounts. Just plain text `.bean` files.
-
 [Chinese / 中文文档](README.zh-CN.md)
+
+## Why QuidClaw
+
+- **Privacy first** — All data stored locally as plain text. No servers, no cloud, no telemetry. Nothing ever leaves your machine.
+- **You own your data** — Standard Beancount `.bean` files you can read, edit, and version control. No vendor lock-in, no proprietary formats.
+- **AI-powered, not AI-dependent** — QuidClaw is just tools. The intelligence comes from your AI client. Switch AI providers anytime.
 
 ## How It Works
 
