@@ -45,82 +45,138 @@ QuidClaw doesn't run any AI model. It's a bridge between your AI client and the 
 
 | Requirement | Description |
 |-------------|-------------|
-| **Python 3.10+** | QuidClaw is a Python package. Check with `python3 --version`. |
+| **Python 3.10 – 3.13** | Check with `python3 --version`. Python 3.14+ is not yet supported by Beancount. |
 | **An MCP client** | Any app that supports the [Model Context Protocol](https://modelcontextprotocol.io/). See setup options below. |
 
 ## Installation
 
-```bash
-git clone https://github.com/thorb/quidclaw.git
-cd quidclaw
-
-python3 -m venv .venv
-source .venv/bin/activate    # macOS / Linux
-# .venv\Scripts\activate     # Windows
-
-pip install -e .
-```
-
-After installation, note the full path to the Python executable — you'll need it for setup:
+Install QuidClaw with a single command — no clone, no venv, no setup:
 
 ```bash
-which python
-# Example output: /home/user/quidclaw/.venv/bin/python
+uvx quidclaw
 ```
 
-## Setup
+> [`uvx`](https://docs.astral.sh/uv/guides/tools/) runs Python packages directly from [PyPI](https://pypi.org/project/quidclaw/). Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh` if you don't have it yet.
 
-Choose the setup that matches your MCP client.
+### Setup Your MCP Client
 
-### Option A: Claude Desktop (recommended for most users)
+Pick your client and follow the instructions:
 
-[Claude Desktop](https://claude.ai/download) is a graphical AI chat application for macOS and Windows.
+<details>
+<summary><b>Claude Desktop</b></summary>
 
-**Step 1.** Open Claude Desktop, click the **Claude** menu in the menu bar (not inside the chat window), then select **Settings**.
-
-**Step 2.** In the Settings window, go to the **Developer** tab and click **Edit Config**. This opens the configuration file `claude_desktop_config.json`.
-
-| OS | Config file location |
-|----|---------------------|
-| macOS | `~/Library/Application Support/Claude/claude_desktop_config.json` |
-| Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
-
-**Step 3.** Add `quidclaw` to the `mcpServers` section:
+Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Config](https://modelcontextprotocol.io/quickstart/user)):
 
 ```json
 {
   "mcpServers": {
     "quidclaw": {
-      "command": "/absolute/path/to/quidclaw/.venv/bin/python",
-      "args": ["-m", "quidclaw"]
+      "command": "uvx",
+      "args": ["quidclaw"]
     }
   }
 }
 ```
 
-> Replace the `command` value with the actual path from `which python` above.
+</details>
 
-**Step 4.** Quit Claude Desktop completely and restart it. You should see an MCP indicator (hammer icon) at the bottom of the chat input. Click it to verify QuidClaw's tools are listed.
-
-### Option B: Claude Code (for developers)
-
-[Claude Code](https://docs.anthropic.com/en/docs/claude-code) is a command-line AI assistant.
+<details>
+<summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add quidclaw -- /absolute/path/to/quidclaw/.venv/bin/python -m quidclaw
+claude mcp add quidclaw -- uvx quidclaw
 ```
 
-Restart Claude Code or start a new session. QuidClaw's tools will be available.
+</details>
 
-### Option C: Other MCP clients
+<details>
+<summary><b>Cursor / Windsurf</b></summary>
 
-QuidClaw is a standard MCP server using stdio transport. Any MCP-compatible client can use it by running:
+Add to your MCP config (Settings → MCP Servers):
+
+```json
+{
+  "mcpServers": {
+    "quidclaw": {
+      "command": "uvx",
+      "args": ["quidclaw"]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+Add to `~/.codex/config.toml` (or run `codex mcp add`):
+
+```toml
+[mcp_servers.quidclaw]
+command = "uvx"
+args = ["quidclaw"]
+type = "stdio"
+```
+
+</details>
+
+<details>
+<summary><b>VS Code (Copilot)</b></summary>
+
+Add to your `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "quidclaw": {
+      "command": "uvx",
+      "args": ["quidclaw"]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Other MCP clients</b></summary>
+
+QuidClaw is a standard MCP server using stdio transport. Configure your client to run:
 
 ```
-/absolute/path/to/quidclaw/.venv/bin/python -m quidclaw
+uvx quidclaw
 ```
 
-Refer to your client's documentation for how to add MCP servers.
+</details>
+
+### Quick Setup for Multiple Clients
+
+If you use multiple MCP clients, [add-mcp](https://github.com/nicepkg/add-mcp) can configure them all at once:
+
+```bash
+npx add-mcp --uvx quidclaw -a claude-code -a claude-desktop -a cursor -a codex
+```
+
+> Remove any `-a <client>` you don't use, or add others like `-a zed`, `-a vscode`, `-a windsurf`.
+
+### Troubleshooting
+
+If `uvx quidclaw` fails with a `beancount` build error, your default Python is likely 3.14+. Fix by specifying a supported version:
+
+```bash
+uvx --python 3.13 quidclaw
+```
+
+## Install from Source (for development)
+
+```bash
+git clone https://github.com/thorb/quidclaw.git
+cd quidclaw
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+```
 
 ## Usage
 
@@ -184,12 +240,9 @@ See [MCP Tools Reference](docs/mcp-tools.md) for full parameter details.
 
 ## Development
 
+See [Install from Source](#install-from-source-for-development) above, then:
+
 ```bash
-git clone https://github.com/thorb/quidclaw.git
-cd quidclaw
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
 pytest
 ```
 
