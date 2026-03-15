@@ -46,21 +46,41 @@ QuidClaw doesn't run any AI model. It's a bridge between your AI client and the 
 | Requirement | Description |
 |-------------|-------------|
 | **Python 3.10 – 3.13** | Check with `python3 --version`. Python 3.14+ is not yet supported by Beancount. |
-| **An MCP client** | Any app that supports the [Model Context Protocol](https://modelcontextprotocol.io/). See setup options below. |
+| **An MCP client** | Any app that supports the [Model Context Protocol](https://modelcontextprotocol.io/) — Claude Desktop, Claude Code, Cursor, Codex, VS Code, etc. |
 
-## Installation
+## Getting Started
 
-Install QuidClaw with a single command — no clone, no venv, no setup:
+QuidClaw is an MCP server — you don't run it directly. Instead, you configure your MCP client to launch it automatically. Choose the method that works best for you:
+
+### Method 1: Auto-configure (recommended)
+
+One command installs QuidClaw and configures your MCP clients automatically:
 
 ```bash
-uvx quidclaw
+npx add-mcp --uvx quidclaw -a claude-desktop
 ```
 
-> [`uvx`](https://docs.astral.sh/uv/guides/tools/) runs Python packages directly from [PyPI](https://pypi.org/project/quidclaw/). Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh` if you don't have it yet.
+Use multiple `-a` flags to configure several clients at once:
 
-### Setup Your MCP Client
+```bash
+npx add-mcp --uvx quidclaw -a claude-desktop -a claude-code -a cursor -a codex
+```
 
-Pick your client and follow the instructions:
+> Supported clients: `claude-desktop`, `claude-code`, `cursor`, `codex`, `windsurf`, `zed`, `vscode`. See [add-mcp](https://github.com/nicepkg/add-mcp) for the full list.
+
+Restart your client and you're ready to go.
+
+### Method 2: Manual configuration
+
+If you prefer to configure manually, or your client isn't supported by add-mcp:
+
+**Step 1.** Install [uv](https://docs.astral.sh/uv/) (if you don't have it):
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Step 2.** Add QuidClaw to your MCP client's config:
 
 <details>
 <summary><b>Claude Desktop</b></summary>
@@ -142,33 +162,15 @@ Add to your `.vscode/mcp.json`:
 <details>
 <summary><b>Other MCP clients</b></summary>
 
-QuidClaw is a standard MCP server using stdio transport. Configure your client to run:
-
-```
-uvx quidclaw
-```
+QuidClaw is a standard MCP server using stdio transport. Configure your client to run `uvx quidclaw`.
 
 </details>
 
-### Quick Setup for Multiple Clients
+**Step 3.** Restart your client. QuidClaw will be downloaded and launched automatically on first use.
 
-If you use multiple MCP clients, [add-mcp](https://github.com/nicepkg/add-mcp) can configure them all at once:
+### Method 3: Install from source
 
-```bash
-npx add-mcp --uvx quidclaw -a claude-code -a claude-desktop -a cursor -a codex
-```
-
-> Remove any `-a <client>` you don't use, or add others like `-a zed`, `-a vscode`, `-a windsurf`.
-
-### Troubleshooting
-
-If `uvx quidclaw` fails with a `beancount` build error, your default Python is likely 3.14+. Fix by specifying a supported version:
-
-```bash
-uvx --python 3.13 quidclaw
-```
-
-## Install from Source (for development)
+For contributors or users without [uv](https://docs.astral.sh/uv/):
 
 ```bash
 git clone https://github.com/thorb/quidclaw.git
@@ -176,6 +178,32 @@ cd quidclaw
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
+```
+
+Then configure your client using the full Python path instead of `uvx`:
+
+```json
+{
+  "mcpServers": {
+    "quidclaw": {
+      "command": "/absolute/path/to/quidclaw/.venv/bin/python",
+      "args": ["-m", "quidclaw"]
+    }
+  }
+}
+```
+
+> Replace the path with the output of `which python` (run inside the activated venv).
+
+### Troubleshooting
+
+If your MCP client reports a `beancount` build error, your default Python is likely 3.14+. Use `--python 3.13` in your config:
+
+```json
+{
+  "command": "uvx",
+  "args": ["--python", "3.13", "quidclaw"]
+}
 ```
 
 ## Usage
