@@ -44,7 +44,7 @@ QuidClaw doesn't run any AI model. It's a bridge between your AI client and the 
 ## Prerequisites
 
 - **[uv](https://docs.astral.sh/uv/)** — Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-- **An MCP client** — Claude Desktop, Claude Code, Cursor, Codex, VS Code, or any [MCP-compatible](https://modelcontextprotocol.io/) app.
+- **An MCP client** — Claude Desktop, Claude Code, Codex, or any [MCP-compatible](https://modelcontextprotocol.io/) app.
 
 ## Getting Started
 
@@ -75,42 +75,6 @@ Restart Claude Desktop.
 
 ```bash
 claude mcp add quidclaw -- uvx --python 3.13 quidclaw
-```
-
-</details>
-
-<details>
-<summary><b>Cursor / Windsurf</b></summary>
-
-Add to your MCP config (Settings → MCP Servers):
-
-```json
-{
-  "mcpServers": {
-    "quidclaw": {
-      "command": "uvx",
-      "args": ["--python", "3.13", "quidclaw"]
-    }
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><b>VS Code (Copilot)</b></summary>
-
-Add to your `.vscode/mcp.json`:
-
-```json
-{
-  "servers": {
-    "quidclaw": {
-      "command": "uvx",
-      "args": ["--python", "3.13", "quidclaw"]
-    }
-  }
-}
 ```
 
 </details>
