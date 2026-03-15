@@ -57,13 +57,13 @@ QuidClaw is an MCP server — you don't run it directly. Instead, you configure 
 One command installs QuidClaw and configures your MCP clients automatically:
 
 ```bash
-npx add-mcp "uvx quidclaw" -a claude-desktop
+npx add-mcp "uvx --upgrade quidclaw" -a claude-desktop
 ```
 
 Use multiple `-a` flags to configure several clients at once:
 
 ```bash
-npx add-mcp "uvx quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
+npx add-mcp "uvx --upgrade quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
 ```
 
 > Supported clients: `claude-desktop`, `claude-code`, `cursor`, `codex`, `windsurf`, `zed`, `vscode`. See [add-mcp](https://github.com/nicepkg/add-mcp) for the full list.
@@ -92,7 +92,7 @@ Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Confi
   "mcpServers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -104,7 +104,7 @@ Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Confi
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add quidclaw -- uvx quidclaw
+claude mcp add quidclaw -- uvx --upgrade quidclaw
 ```
 
 </details>
@@ -119,7 +119,7 @@ Add to your MCP config (Settings → MCP Servers):
   "mcpServers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -135,7 +135,7 @@ Add to `~/.codex/config.toml` (or run `codex mcp add`):
 ```toml
 [mcp_servers.quidclaw]
 command = "uvx"
-args = ["quidclaw"]
+args = ["--upgrade", "quidclaw"]
 type = "stdio"
 ```
 
@@ -151,7 +151,7 @@ Add to your `.vscode/mcp.json`:
   "servers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -162,7 +162,7 @@ Add to your `.vscode/mcp.json`:
 <details>
 <summary><b>Other MCP clients</b></summary>
 
-QuidClaw is a standard MCP server using stdio transport. Configure your client to run `uvx quidclaw`.
+QuidClaw is a standard MCP server using stdio transport. Configure your client to run `uvx --upgrade quidclaw`.
 
 </details>
 
@@ -202,7 +202,7 @@ If your MCP client reports a `beancount` build error, your default Python is lik
 ```json
 {
   "command": "uvx",
-  "args": ["--python", "3.13", "quidclaw"]
+  "args": ["--upgrade", "--python", "3.13", "quidclaw"]
 }
 ```
 

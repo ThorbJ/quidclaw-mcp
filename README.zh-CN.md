@@ -57,13 +57,13 @@ QuidClaw 是一个 MCP 服务器——你不需要直接运行它。你只需配
 一条命令安装 QuidClaw 并自动配置你的 MCP 客户端：
 
 ```bash
-npx add-mcp "uvx quidclaw" -a claude-desktop
+npx add-mcp "uvx --upgrade quidclaw" -a claude-desktop
 ```
 
 用多个 `-a` 同时配置多个客户端：
 
 ```bash
-npx add-mcp "uvx quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
+npx add-mcp "uvx --upgrade quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
 ```
 
 > 支持的客户端：`claude-desktop`、`claude-code`、`cursor`、`codex`、`windsurf`、`zed`、`vscode`。完整列表见 [add-mcp](https://github.com/nicepkg/add-mcp)。
@@ -92,7 +92,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
   "mcpServers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -104,7 +104,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add quidclaw -- uvx quidclaw
+claude mcp add quidclaw -- uvx --upgrade quidclaw
 ```
 
 </details>
@@ -119,7 +119,7 @@ claude mcp add quidclaw -- uvx quidclaw
   "mcpServers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -135,7 +135,7 @@ claude mcp add quidclaw -- uvx quidclaw
 ```toml
 [mcp_servers.quidclaw]
 command = "uvx"
-args = ["quidclaw"]
+args = ["--upgrade", "quidclaw"]
 type = "stdio"
 ```
 
@@ -151,7 +151,7 @@ type = "stdio"
   "servers": {
     "quidclaw": {
       "command": "uvx",
-      "args": ["quidclaw"]
+      "args": ["--upgrade", "quidclaw"]
     }
   }
 }
@@ -162,7 +162,7 @@ type = "stdio"
 <details>
 <summary><b>其他 MCP 客户端</b></summary>
 
-QuidClaw 是标准的 MCP 服务器，使用 stdio 传输。配置你的客户端运行 `uvx quidclaw`。
+QuidClaw 是标准的 MCP 服务器，使用 stdio 传输。配置你的客户端运行 `uvx --upgrade quidclaw`。
 
 </details>
 
@@ -202,7 +202,7 @@ pip install -e ".[dev]"
 ```json
 {
   "command": "uvx",
-  "args": ["--python", "3.13", "quidclaw"]
+  "args": ["--upgrade", "--python", "3.13", "quidclaw"]
 }
 ```
 
