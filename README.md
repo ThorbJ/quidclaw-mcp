@@ -43,45 +43,14 @@ QuidClaw doesn't run any AI model. It's a bridge between your AI client and the 
 
 ## Prerequisites
 
-- **Python 3.10 – 3.13** — Check with `python3 --version`. Python 3.14+ is not yet supported by Beancount.
 - **[uv](https://docs.astral.sh/uv/)** — Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - **An MCP client** — Claude Desktop, Claude Code, Cursor, Codex, VS Code, or any [MCP-compatible](https://modelcontextprotocol.io/) app.
 
 ## Getting Started
 
-### Step 1: Install QuidClaw
+Add QuidClaw to your MCP client's config. Pick your client below:
 
-```bash
-uv tool install --python 3.13 quidclaw
-```
-
-### Step 2: Connect to your MCP client
-
-The easiest way — auto-detects your installed clients and lets you choose:
-
-```bash
-npx add-mcp "quidclaw"
-```
-
-Or specify clients directly:
-
-```bash
-npx add-mcp "quidclaw" -a claude-desktop -a claude-code -a cursor -a codex
-```
-
-Restart your client and you're ready to go.
-
-### Upgrade
-
-```bash
-uv tool upgrade quidclaw
-```
-
-### Manual configuration
-
-If you prefer to configure your client manually instead of using `add-mcp`:
-
-<details>
+<details open>
 <summary><b>Claude Desktop</b></summary>
 
 Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Config](https://modelcontextprotocol.io/quickstart/user)):
@@ -90,12 +59,14 @@ Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Confi
 {
   "mcpServers": {
     "quidclaw": {
-      "command": "quidclaw",
-      "args": []
+      "command": "uvx",
+      "args": ["--python", "3.13", "quidclaw"]
     }
   }
 }
 ```
+
+Restart Claude Desktop.
 
 </details>
 
@@ -103,7 +74,7 @@ Add to your `claude_desktop_config.json` ([Settings → Developer → Edit Confi
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add quidclaw -- quidclaw
+claude mcp add quidclaw -- uvx --python 3.13 quidclaw
 ```
 
 </details>
@@ -117,25 +88,11 @@ Add to your MCP config (Settings → MCP Servers):
 {
   "mcpServers": {
     "quidclaw": {
-      "command": "quidclaw",
-      "args": []
+      "command": "uvx",
+      "args": ["--python", "3.13", "quidclaw"]
     }
   }
 }
-```
-
-</details>
-
-<details>
-<summary><b>Codex</b></summary>
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.quidclaw]
-command = "quidclaw"
-args = []
-type = "stdio"
 ```
 
 </details>
@@ -149,14 +106,51 @@ Add to your `.vscode/mcp.json`:
 {
   "servers": {
     "quidclaw": {
-      "command": "quidclaw",
-      "args": []
+      "command": "uvx",
+      "args": ["--python", "3.13", "quidclaw"]
     }
   }
 }
 ```
 
 </details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+Codex runs MCP servers in a sandbox, so `uvx` won't work directly. Install first, then configure:
+
+```bash
+uv tool install --python 3.13 quidclaw
+```
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.quidclaw]
+command = "quidclaw"
+args = []
+type = "stdio"
+```
+
+</details>
+
+<details>
+<summary><b>Other MCP clients</b></summary>
+
+QuidClaw is a standard MCP server using stdio transport. Configure your client to run:
+
+```
+uvx --python 3.13 quidclaw
+```
+
+</details>
+
+That's it. Your client will automatically download and run QuidClaw on first launch.
+
+### Upgrade
+
+QuidClaw is downloaded fresh by `uvx` each time your client starts, so you'll always get the latest version automatically.
 
 ### Install from source
 
