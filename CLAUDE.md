@@ -30,7 +30,7 @@ This separation exists so we can add other adapters (e.g., OpenClaw) without tou
 
 ## Tech Stack
 
-- Python >= 3.10
+- Python 3.10 – 3.13
 - `beancount` V3 (3.x) — accounting engine
 - `beanquery` — BQL query execution
 - `beanprice` — price fetching (optional)
