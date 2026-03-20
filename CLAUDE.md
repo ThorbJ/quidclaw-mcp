@@ -1,4 +1,4 @@
-# QuidClaw
+# QuidClaw MCP
 
 Personal finance AI Agent. MCP Server powered by Beancount V3.
 
@@ -6,8 +6,8 @@ Personal finance AI Agent. MCP Server powered by Beancount V3.
 
 Layered design — two layers:
 
-- `src/quidclaw/core/` — Pure business logic. Depends on Beancount, NOT on MCP. Every financial operation lives here.
-- `src/quidclaw/mcp_server/` — Thin MCP adapter. Translates MCP tool calls into core function calls. No business logic here.
+- `src/quidclaw_mcp/core/` — Pure business logic. Depends on Beancount, NOT on MCP. Every financial operation lives here.
+- `src/quidclaw_mcp/mcp_server/` — Thin MCP adapter. Translates MCP tool calls into core function calls. No business logic here.
 
 This separation exists so we can add other adapters (e.g., OpenClaw) without touching core logic.
 
@@ -15,18 +15,18 @@ This separation exists so we can add other adapters (e.g., OpenClaw) without tou
 
 | File | Purpose |
 |------|---------|
-| `src/quidclaw/config.py` | `QuidClawConfig` dataclass — data directory paths |
-| `src/quidclaw/core/ledger.py` | `Ledger` — init, load, append to .bean files |
-| `src/quidclaw/core/accounts.py` | `AccountManager` — open/close/list accounts |
-| `src/quidclaw/core/transactions.py` | `TransactionManager` — add transactions to monthly files |
-| `src/quidclaw/core/balance.py` | `BalanceManager` — balance queries and assertions |
-| `src/quidclaw/core/reports.py` | `ReportManager` — BQL queries and report generation |
-| `src/quidclaw/core/prices.py` | `PriceManager` — write price directives |
-| `src/quidclaw/core/init.py` | `LedgerInitializer` — default account templates |
-| `src/quidclaw/mcp_server/server.py` | `create_server()` — FastMCP instance with lifespan |
-| `src/quidclaw/mcp_server/tools.py` | MCP Tool definitions (10 tools) |
-| `src/quidclaw/mcp_server/prompts.py` | MCP Prompts (personality, guides) |
-| `src/quidclaw/mcp_server/resources.py` | MCP Resources (account tree, config) |
+| `src/quidclaw_mcp/config.py` | `QuidClawConfig` dataclass — data directory paths |
+| `src/quidclaw_mcp/core/ledger.py` | `Ledger` — init, load, append to .bean files |
+| `src/quidclaw_mcp/core/accounts.py` | `AccountManager` — open/close/list accounts |
+| `src/quidclaw_mcp/core/transactions.py` | `TransactionManager` — add transactions to monthly files |
+| `src/quidclaw_mcp/core/balance.py` | `BalanceManager` — balance queries and assertions |
+| `src/quidclaw_mcp/core/reports.py` | `ReportManager` — BQL queries and report generation |
+| `src/quidclaw_mcp/core/prices.py` | `PriceManager` — write price directives |
+| `src/quidclaw_mcp/core/init.py` | `LedgerInitializer` — default account templates |
+| `src/quidclaw_mcp/mcp_server/server.py` | `create_server()` — FastMCP instance with lifespan |
+| `src/quidclaw_mcp/mcp_server/tools.py` | MCP Tool definitions (10 tools) |
+| `src/quidclaw_mcp/mcp_server/prompts.py` | MCP Prompts (personality, guides) |
+| `src/quidclaw_mcp/mcp_server/resources.py` | MCP Resources (account tree, config) |
 
 ## Tech Stack
 
@@ -62,8 +62,8 @@ Default: `~/.quidclaw/`. Override: `QUIDCLAW_DATA_DIR` env var or pass `data_dir
 
 ## How to Add a New MCP Tool
 
-1. Add core logic in `src/quidclaw/core/<module>.py` with tests in `tests/core/`
-2. Add tool wrapper in `src/quidclaw/mcp_server/tools.py` inside `register_tools()`
+1. Add core logic in `src/quidclaw_mcp/core/<module>.py` with tests in `tests/core/`
+2. Add tool wrapper in `src/quidclaw_mcp/mcp_server/tools.py` inside `register_tools()`
 3. Pattern:
    ```python
    @mcp.tool()

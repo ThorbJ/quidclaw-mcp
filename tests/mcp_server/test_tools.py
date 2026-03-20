@@ -1,7 +1,7 @@
 import pytest
 import asyncio
 import os
-from quidclaw.mcp_server.server import create_server
+from quidclaw_mcp.mcp_server.server import create_server
 
 
 @pytest.fixture

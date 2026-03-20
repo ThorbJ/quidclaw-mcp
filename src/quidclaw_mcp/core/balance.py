@@ -1,7 +1,7 @@
 import datetime
 from decimal import Decimal
 from beancount.core import realization
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class BalanceManager:
@@ -50,7 +50,7 @@ class BalanceManager:
         """Write a balance assertion directive."""
         line = f'{date} balance {account}  {amount} {currency}\n'
         month_file = self.ledger.config.month_bean(date.year, date.month)
-        from quidclaw.core.transactions import TransactionManager
+        from quidclaw_mcp.core.transactions import TransactionManager
         txn_mgr = TransactionManager(self.ledger)
         txn_mgr._ensure_month_included(date.year, date.month)
         self.ledger.append(month_file, line)

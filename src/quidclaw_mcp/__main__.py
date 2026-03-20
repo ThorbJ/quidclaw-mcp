@@ -1,4 +1,4 @@
-from quidclaw.mcp_server.server import create_server
+from quidclaw_mcp.mcp_server.server import create_server
 
 
 def main():

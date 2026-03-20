@@ -1,10 +1,10 @@
 import datetime
 from decimal import Decimal
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
-from quidclaw.core.accounts import AccountManager
-from quidclaw.core.transactions import TransactionManager
-from quidclaw.core.balance import BalanceManager
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
+from quidclaw_mcp.core.accounts import AccountManager
+from quidclaw_mcp.core.transactions import TransactionManager
+from quidclaw_mcp.core.balance import BalanceManager
 
 
 def make_ledger_with_txns(tmp_path):

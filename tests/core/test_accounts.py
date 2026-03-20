@@ -1,7 +1,7 @@
 import datetime
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
-from quidclaw.core.accounts import AccountManager
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
+from quidclaw_mcp.core.accounts import AccountManager
 
 
 def make_ledger(tmp_path):

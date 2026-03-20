@@ -1,7 +1,7 @@
 import datetime
 from beancount.core import data
-from quidclaw.core.ledger import Ledger
-from quidclaw.core.accounts import AccountManager
+from quidclaw_mcp.core.ledger import Ledger
+from quidclaw_mcp.core.accounts import AccountManager
 
 DEFAULT_ACCOUNTS = [
     # Assets

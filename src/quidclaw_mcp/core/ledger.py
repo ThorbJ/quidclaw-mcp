@@ -1,6 +1,6 @@
 from pathlib import Path
 from beancount import loader
-from quidclaw.config import QuidClawConfig
+from quidclaw_mcp.config import QuidClawConfig
 
 
 class Ledger:
@@ -19,7 +19,7 @@ class Ledger:
 
         if not self.config.main_bean.exists():
             self.config.main_bean.write_text(
-                'option "title" "QuidClaw Ledger"\n'
+                'option "title" "QuidClaw MCP Ledger"\n'
                 'option "operating_currency" "CNY"\n'
                 '\n'
                 'include "accounts.bean"\n'

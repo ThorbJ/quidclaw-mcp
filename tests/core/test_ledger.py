@@ -1,6 +1,6 @@
 from pathlib import Path
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
 
 
 def test_init_creates_directory_structure(tmp_path):

@@ -11,3 +11,6 @@ docs/plans/
 
 # Claude Code local config
 .claude/
+
+.playwright-mcp/
+uv.lock

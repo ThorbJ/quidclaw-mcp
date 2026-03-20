@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from quidclaw.config import QuidClawConfig
+from quidclaw_mcp.config import QuidClawConfig
 
 
 def test_default_data_dir():

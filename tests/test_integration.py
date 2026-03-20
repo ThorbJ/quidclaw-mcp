@@ -1,13 +1,13 @@
 """End-to-end test: init -> add accounts -> add transactions -> query -> report."""
 import datetime
 from decimal import Decimal
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
-from quidclaw.core.init import LedgerInitializer
-from quidclaw.core.accounts import AccountManager
-from quidclaw.core.transactions import TransactionManager
-from quidclaw.core.balance import BalanceManager
-from quidclaw.core.reports import ReportManager
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
+from quidclaw_mcp.core.init import LedgerInitializer
+from quidclaw_mcp.core.accounts import AccountManager
+from quidclaw_mcp.core.transactions import TransactionManager
+from quidclaw_mcp.core.balance import BalanceManager
+from quidclaw_mcp.core.reports import ReportManager
 
 
 def test_full_workflow(tmp_path):

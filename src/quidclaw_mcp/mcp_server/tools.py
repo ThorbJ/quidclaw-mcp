@@ -9,7 +9,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def init_ledger(ctx: Context, accounts: list[dict] | None = None) -> str:
         """Initialize ledger with account template. Pass accounts from AI conversation or omit for defaults."""
-        from quidclaw.core.init import LedgerInitializer
+        from quidclaw_mcp.core.init import LedgerInitializer
         app = ctx.request_context.lifespan_context
         initializer = LedgerInitializer(app.ledger)
         created = initializer.init_with_template(accounts=accounts)
@@ -22,7 +22,7 @@ def register_tools(mcp: FastMCP):
         ctx: Context, name: str, currencies: list[str] | None = None, open_date: str | None = None
     ) -> str:
         """Open a new account. Example: name='Assets:Bank:BOC', currencies=['CNY']"""
-        from quidclaw.core.accounts import AccountManager
+        from quidclaw_mcp.core.accounts import AccountManager
         app = ctx.request_context.lifespan_context
         mgr = AccountManager(app.ledger)
         date = datetime.date.fromisoformat(open_date) if open_date else None
@@ -32,7 +32,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def close_account(ctx: Context, name: str, close_date: str | None = None) -> str:
         """Close an account."""
-        from quidclaw.core.accounts import AccountManager
+        from quidclaw_mcp.core.accounts import AccountManager
         app = ctx.request_context.lifespan_context
         mgr = AccountManager(app.ledger)
         date = datetime.date.fromisoformat(close_date) if close_date else None
@@ -42,7 +42,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def list_accounts(ctx: Context, type: str | None = None) -> str:
         """List all accounts, optionally filtered by type (Assets, Liabilities, Income, Expenses, Equity)."""
-        from quidclaw.core.accounts import AccountManager
+        from quidclaw_mcp.core.accounts import AccountManager
         app = ctx.request_context.lifespan_context
         mgr = AccountManager(app.ledger)
         accounts = mgr.list_accounts(account_type=type)
@@ -60,7 +60,7 @@ def register_tools(mcp: FastMCP):
     ) -> str:
         """Add a transaction. Each posting: {account, amount (optional), currency (optional)}.
         Omit amount on one posting for auto-balance."""
-        from quidclaw.core.transactions import TransactionManager
+        from quidclaw_mcp.core.transactions import TransactionManager
         app = ctx.request_context.lifespan_context
         mgr = TransactionManager(app.ledger)
         txn_date = datetime.date.fromisoformat(date)
@@ -70,7 +70,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def get_balance(ctx: Context, account: str | None = None, date: str | None = None) -> str:
         """Get account balance. Omit account for all balances."""
-        from quidclaw.core.balance import BalanceManager
+        from quidclaw_mcp.core.balance import BalanceManager
         app = ctx.request_context.lifespan_context
         mgr = BalanceManager(app.ledger)
         if account:
@@ -94,7 +94,7 @@ def register_tools(mcp: FastMCP):
         ctx: Context, account: str, expected_amount: str, currency: str, date: str | None = None
     ) -> str:
         """Check if account balance matches expected amount (for reconciliation)."""
-        from quidclaw.core.balance import BalanceManager
+        from quidclaw_mcp.core.balance import BalanceManager
         app = ctx.request_context.lifespan_context
         mgr = BalanceManager(app.ledger)
         ok, msg = mgr.balance_check(account, Decimal(expected_amount), currency)
@@ -103,7 +103,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def query(ctx: Context, bql: str) -> str:
         """Execute a BQL (Beancount Query Language) query. Returns tabular results."""
-        from quidclaw.core.reports import ReportManager
+        from quidclaw_mcp.core.reports import ReportManager
         app = ctx.request_context.lifespan_context
         mgr = ReportManager(app.ledger)
         try:
@@ -121,7 +121,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def report(ctx: Context, type: str, period: str | None = None) -> str:
         """Generate a financial report. Types: income_statement, balance_sheet."""
-        from quidclaw.core.reports import ReportManager
+        from quidclaw_mcp.core.reports import ReportManager
         app = ctx.request_context.lifespan_context
         mgr = ReportManager(app.ledger)
         if type == "income_statement":
@@ -134,7 +134,7 @@ def register_tools(mcp: FastMCP):
     @mcp.tool()
     async def fetch_prices(ctx: Context, commodities: list[str] | None = None) -> str:
         """Fetch latest prices for commodities and write to ledger."""
-        from quidclaw.core.prices import PriceManager
+        from quidclaw_mcp.core.prices import PriceManager
         app = ctx.request_context.lifespan_context
         mgr = PriceManager(app.ledger)
         try:

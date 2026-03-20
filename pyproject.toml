@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "quidclaw"
+name = "quidclaw-mcp"
 version = "0.1.1"
 description = "MCP-based personal finance AI Agent powered by Beancount"
 readme = "README.md"
@@ -26,9 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/thorb/quidclaw"
-Repository = "https://github.com/thorb/quidclaw"
-Issues = "https://github.com/thorb/quidclaw/issues"
+Homepage = "https://github.com/thorb/quidclaw-mcp"
+Repository = "https://github.com/thorb/quidclaw-mcp"
+Issues = "https://github.com/thorb/quidclaw-mcp/issues"
 
 [project.optional-dependencies]
 prices = ["beanprice>=0.1.0"]
@@ -38,4 +38,4 @@ dev = [
 ]
 
 [project.scripts]
-quidclaw = "quidclaw.__main__:main"
+quidclaw-mcp = "quidclaw_mcp.__main__:main"

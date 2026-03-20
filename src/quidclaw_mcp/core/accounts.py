@@ -1,6 +1,6 @@
 import datetime
 from beancount.core import data
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class AccountManager:

@@ -1,6 +1,6 @@
 import datetime
 from pathlib import Path
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class TransactionManager:

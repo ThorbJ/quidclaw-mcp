@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from mcp.server.fastmcp import FastMCP
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class AppContext:
@@ -20,14 +20,14 @@ async def app_lifespan(server: FastMCP):
 
 def create_server() -> FastMCP:
     mcp = FastMCP(
-        "QuidClaw",
+        "QuidClaw MCP",
         instructions="Personal finance AI Agent powered by Beancount",
         lifespan=app_lifespan,
     )
 
-    from quidclaw.mcp_server.tools import register_tools
-    from quidclaw.mcp_server.prompts import register_prompts
-    from quidclaw.mcp_server.resources import register_resources
+    from quidclaw_mcp.mcp_server.tools import register_tools
+    from quidclaw_mcp.mcp_server.prompts import register_prompts
+    from quidclaw_mcp.mcp_server.resources import register_resources
 
     register_tools(mcp)
     register_prompts(mcp)

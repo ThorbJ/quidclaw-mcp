@@ -1,5 +1,5 @@
 from beanquery.query import run_query
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class ReportManager:

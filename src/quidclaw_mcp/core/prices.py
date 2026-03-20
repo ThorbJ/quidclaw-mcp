@@ -1,6 +1,6 @@
 import datetime
 from decimal import Decimal
-from quidclaw.core.ledger import Ledger
+from quidclaw_mcp.core.ledger import Ledger
 
 
 class PriceManager:

@@ -7,7 +7,7 @@ def register_resources(mcp: FastMCP):
     @mcp.resource("quidclaw://accounts")
     async def account_tree(ctx: Context) -> str:
         """Current account structure."""
-        from quidclaw.core.accounts import AccountManager
+        from quidclaw_mcp.core.accounts import AccountManager
         app = ctx.request_context.lifespan_context
         mgr = AccountManager(app.ledger)
         accounts = mgr.list_accounts()
@@ -15,7 +15,7 @@ def register_resources(mcp: FastMCP):
 
     @mcp.resource("quidclaw://config")
     async def config_resource(ctx: Context) -> str:
-        """Current QuidClaw configuration."""
+        """Current QuidClaw MCP configuration."""
         app = ctx.request_context.lifespan_context
         return json.dumps({
             "data_dir": str(app.config.data_dir),

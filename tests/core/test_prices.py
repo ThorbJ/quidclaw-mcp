@@ -1,8 +1,8 @@
 import datetime
 from decimal import Decimal
-from quidclaw.config import QuidClawConfig
-from quidclaw.core.ledger import Ledger
-from quidclaw.core.prices import PriceManager
+from quidclaw_mcp.config import QuidClawConfig
+from quidclaw_mcp.core.ledger import Ledger
+from quidclaw_mcp.core.prices import PriceManager
 
 
 def make_ledger(tmp_path):
